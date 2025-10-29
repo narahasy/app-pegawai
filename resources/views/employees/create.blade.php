@@ -42,6 +42,26 @@
                 </td>
             </tr>
             <tr>
+                <td><label for="departemen_id">Departemen:</label></td>
+                <td>
+                    <select id="departemen_id" name="departemen_id" class="form-control">
+                        @foreach ($departemens as $departemen)
+                            <option value="{{ $departemen->id }}">{{ $departemen->nama_departemen }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="jabatan_id">Jabatan:</label></td>
+                <td>
+                    <select name="jabatan_id" required>
+                        @foreach ($positions as $position)
+                            <option value="{{ $position->id }}">{{ $position->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" style="text-align:right;">
                     <button type="submit">Simpan</button>
                 </td>
