@@ -1,34 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Form Absensi</title>
-</head>
-<body>
-    <h1>Form Absensi</h1>
+@extends('master')
+@section('content')
+<div class="container">
+    <h1>Tambah Absensi</h1>
+
     <form action="{{ route('attendances.store') }}" method="POST">
         @csrf
+        <table border="1" cellpadding="5" cellspacing="0">
             <tr>
-                <td><label for="karyawan_id">Nama Karyawan:</label></td>
+                <td><label for="karyawan_id">Nama Karyawan</label></td>
                 <td>
-                    <select id="karyawan_id" name="karyawan_id" class="form-control">
-                        <option value="1">nabilah</option>
+                    <select name="karyawan_id" id="karyawan_id" required>
+                        <option value="">Pilih Karyawan</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}">{{ $employee->nama_lengkap }}</option>
+                        @endforeach
                     </select>
                 </td>
             </tr>
-        <br>
-        <label>Tanggal:</label>
-        <input type="date" name="tanggal" required><br>
-
-        <label>Waktu Masuk:</label>
-        <input type="time" name="waktu_masuk" required><br>
-
-        <label>Waktu Keluar:</label>
-        <input type="time" name="waktu_keluar"><br>
-
-        <label>Status Absensi:</label>
-        <input type="text" name="status_absensi" required><br>
-
-        <button type="submit">Simpan</button>
+            <tr>
+                <td><label for="tanggal">Tanggal</label></td>
+                <td><input type="date" name="tanggal" id="tanggal" required></td>
+            </tr>
+            <tr>
+                <td><label for="waktu_masuk">Waktu Masuk</label></td>
+                <td><input type="time" name="waktu_masuk" id="waktu_masuk"></td>
+            </tr>
+            <tr>
+                <td><label for="waktu_keluar">Waktu Keluar</label></td>
+                <td><input type="time" name="waktu_keluar" id="waktu_keluar"></td>
+            </tr>
+            <tr>
+                <td><label for="status_absensi">Status Absensi</label></td>
+                <td>
+                    <select name="status_absensi" id="status_absensi" required>
+                        <option value="">Pilih Status</option>
+                        @foreach($statuses as $status)
+                            <option value="{{ $status }}">{{ ucfirst($status) }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right;">
+                    <button type="submit">Simpan</button>
+                    <button type="button" onclick="window.location='{{ route('attendances.index') }}'">Batal</button>
+                </td>
+            </tr>
+        </table>
     </form>
-</body>
-</html>
+</div>
+@endsection

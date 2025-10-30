@@ -5,16 +5,23 @@
 </head>
 <body>
     <h2>Edit Data Jabatan</h2>
+
     <form action="{{ route('positions.update', $position->id) }}" method="POST">
         @csrf
-        @method('PUT')
-        <label>Nama Jabatan:</label>
-        <input type="text" name="nama_jabatan" value="{{ old('nama_jabatan', $position->nama_jabatan) }}" required><br>
+        @method('PUT') 
 
-        <label>Gaji Pokok:</label>
-        <input type="number" name="gaji_pokok" value="{{ old('gaji_pokok', $position->gaji_pokok) }}" required><br>
+        <table>
+        <tr>
+            <td><label for="nama_jabatan">Nama Jabatan:</label></td>
+            <td><input type="text" name="nama_jabatan" id="nama_jabatan" value="{{ $position->nama_jabatan }}" required></td>
+        </tr>
+        <tr>
+            <td><label for="gaji_pokok">Gaji Pokok:</label></td>
+            <td><input type="number" step="0.01" id="gaji_pokok" name="gaji_pokok" value="{{ old('gaji_pokok', $position->gaji_pokok) }}"></td>
+        </tr>
+    </table>
 
-        <button type="submit">Update</button>
+        <button type="submit">Simpan Perubahan</button>
     </form>
 </body>
 </html>

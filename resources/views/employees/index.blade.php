@@ -32,7 +32,7 @@
                 <td>{{ $employee->tanggal_lahir }}</td>
                 <td>{{ $employee->alamat }}</td>
                 <td>{{ $employee->tanggal_masuk }}</td>
-                <td>{{ $employee->status }}</td>
+                <td>{{ ucfirst($employee->status) }}</td>
                 <td>
                     <a href="{{ route('employees.show', $employee->id) }}">Detail</a> |
                     <a href="{{ route('employees.edit', $employee->id) }}">Edit</a> |

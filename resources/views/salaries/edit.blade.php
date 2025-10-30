@@ -9,12 +9,12 @@
         @csrf
         @method('PUT')
 
-        <label>Karyawan:</label>
+        <label>Nama Karyawan:</label>
         <select name="karyawan_id" required>
             <option value="">Pilih Karyawan</option>
             @foreach($employees as $employee)
                 <option value="{{ $employee->id }}" {{ $employee->id == $salary->karyawan_id ? 'selected' : '' }}>
-                    {{ $employee->nama }}
+                    {{ $employee->nama_lengkap }}
                 </option>
             @endforeach
         </select><br>

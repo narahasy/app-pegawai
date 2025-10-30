@@ -32,7 +32,32 @@
             <td>
                 <select name="status">
                     <option value="aktif" {{ old('status', $employee->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                    <option value="tidak aktif" {{ old('status', $employee->status) == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                    <option value="nonaktif" {{ old('status', $employee->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="departemen_id">Departemen:</label></td>
+            <td>
+                <select id="departemen_id" name="departemen_id" required>
+                    <option value="">Pilih Departemen</option>
+                    @foreach($departemens as $departemen)
+                        <option value="{{ $departemen->id }}" {{ old('departemen_id', $employee->departemen_id) == $departemen->id ? 'selected' : '' }}>
+                            {{ $departemen->nama_departemen }}
+                        </option>
+                    @endforeach
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Jabatan</td>
+            <td>
+                <select name="jabatan_id">
+                    @foreach($positions as $position)
+                        <option value="{{ $position->id }}" {{ old('jabatan_id', $employee->jabatan_id) == $position->id ? 'selected' : '' }}>
+                            {{ $position->nama_jabatan }}
+                        </option>
+                    @endforeach
                 </select>
             </td>
         </tr>

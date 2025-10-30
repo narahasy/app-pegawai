@@ -81,6 +81,11 @@ class SalaryController extends Controller
                          ->with('success', 'Data gaji berhasil diperbarui.');
     }
 
+    public function employees()
+    {
+        return $this->belongsTo(Employee::class, 'karyawan_id');
+    }
+
     public function destroy(Salary $salary)
     {
         $salary->delete();

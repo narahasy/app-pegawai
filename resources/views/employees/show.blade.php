@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td>{{ $employee->status }}</td>
+            <td>{{ ucfirst($employee->status) }}</td>
         </tr>
     </table>
 </body>

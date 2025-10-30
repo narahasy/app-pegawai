@@ -27,7 +27,7 @@ class Employee extends Model
     }
 
 
-    public function position()
+    public function jabatan()
     {
         return $this->belongsTo(Position::class, 'jabatan_id');
     }

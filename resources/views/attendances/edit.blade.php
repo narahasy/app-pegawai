@@ -8,7 +8,7 @@
     <form action="{{ route('attendances.update', $attendance->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <label>Karyawan ID:</label>
+        <label>Nama Karyawan:</label>
         <input type="number" name="karyawan_id" value="{{ old('karyawan_id', $attendance->karyawan_id) }}" required><br>
 
         <label>Tanggal:</label>

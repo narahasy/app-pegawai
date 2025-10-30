@@ -8,7 +8,7 @@
     <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>Nama Departemen</th>
-            <td>{{ $departemen->nama }}</td>
+            <td>{{ $departemen->nama_departemen }}</td>
         </tr>
         <tr>
             <th>Dibuat</th>

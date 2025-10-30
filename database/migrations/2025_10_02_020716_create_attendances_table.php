@@ -8,7 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-      Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
+            $table->bigIncrements('id'); 
 
             $table->unsignedBigInteger('karyawan_id');
             $table->date('tanggal');
@@ -24,7 +25,7 @@ return new class extends Migration
         });
     }
 
-       public function down(): void
+    public function down(): void
     {
         Schema::dropIfExists('attendances');
     }

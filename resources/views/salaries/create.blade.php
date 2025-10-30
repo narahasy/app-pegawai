@@ -7,11 +7,11 @@
     <h1>Form Gaji</h1>
     <form action="{{ route('salaries.store') }}" method="POST">
         @csrf
-        <label>Karyawan:</label>
+        <label>Nama Karyawan:</label>
         <select name="karyawan_id" required>
             <option value="">Pilih Karyawan</option>
             @foreach($employees as $employee)
-                <option value="{{ $employee->id }}">{{ $employee->nama }}</option>
+                <option value="{{ $employees->id }}">{{ $employee->nama_lengkap }}</option>
             @endforeach
         </select><br>
 

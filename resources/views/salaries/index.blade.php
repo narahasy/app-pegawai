@@ -1,13 +1,14 @@
 @extends('master')
 @section('title', 'Daftar Gaji')
 @section('content')
+
 <div class="container mt-5">
     <h1>Daftar Gaji</h1>
     <a href="{{ route('salaries.create') }}">Tambah Salary</a>
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
-                <th>Karyawan</th>
+                <th>Nama Karyawan</th>
                 <th>Bulan</th>
                 <th>Gaji Pokok</th>
                 <th>Tunjangan</th>
@@ -19,7 +20,7 @@
         <tbody>
             @foreach($salaries as $salary)
             <tr>
-                <td>{{ $salary->employee->nama ?? '-' }}</td>
+                <td>{{ $salary->employees->nama_lengkap ?? '-' }}</td>
                 <td>{{ $salary->bulan }}</td>
                 <td>{{ number_format($salary->gaji_pokok) }}</td>
                 <td>{{ number_format($salary->tunjangan) }}</td>

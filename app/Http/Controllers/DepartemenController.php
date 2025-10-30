@@ -47,10 +47,8 @@ class DepartemenController extends Controller
         $request->validate([
             'nama_departemen' => 'required|string|max:255',
         ]);
-
-        $departemen->update([
-            'nama_departemen' => $request->nama_departemen,
-        ]);
+        
+        $departemen->update($request->all());
 
         return redirect()->route('departemens.index')
                          ->with('success', 'Departemen berhasil diperbarui.');

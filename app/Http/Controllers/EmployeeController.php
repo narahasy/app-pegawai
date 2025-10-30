@@ -19,7 +19,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $departemens = Departemen::all();
-        $positions = Position::all(); // ← ini yang penting ditambahkan
+        $positions = Position::all(); 
 
         return view('employees.create', compact('departemens', 'positions'));
     }
@@ -35,7 +35,7 @@ class EmployeeController extends Controller
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
             'departemen_id' => 'required|integer|exists:departemens,id',
-            'jabatan_id' => 'required|integer|exists:positions,id',
+            'jabatan_id' => 'required|integer|exists:positions,id', 
         ]);
         Employee::create($request->all());
         return redirect()->route('employees.index');
@@ -50,13 +50,17 @@ class EmployeeController extends Controller
 
     public function edit(string $id)
     {
-        $employee = Employee::find($id);
-        
-        return view('employees.edit',compact('employee'));
+        $employee = Employee::findOrFail($id);
+        $departemens = Departemen::orderBy('nama_departemen')->get();
+        $positions = Position::orderBy('nama_jabatan')->get();
+    
+        return view('employees.edit', compact('employee', 'departemens', 'positions'));
     }
 
     public function update(Request $request, string $id)
     {
+        $employee = Employee::findOrFail($id);
+
         $request->validate([
         'nama_lengkap'  => 'required|string|max:255',
         'email'         => 'required|email|max:255',
@@ -66,20 +70,10 @@ class EmployeeController extends Controller
         'tanggal_masuk' => 'required|date',
         'status'        => 'required|string|max:50',
         'departemen_id'  => 'required|integer|exists:departemens,id',
-
-    ]);
-    $employee = Employee::findOrFail($id);
-    $employee->update($request->only([
-        'nama_lengkap',
-        'email',
-        'nomor_telepon',
-        'tanggal_lahir',
-        'alamat',
-        'tanggal_masuk',
-        'status',
-        'departemen_id',
-    ]));
-    return redirect()->route('employees.index');
+        'jabatan_id' => 'required|integer|exists:positions,id',
+        ]);
+        $employee->update($request->all());
+        return redirect()->route('employees.index');
     }
 
     public function destroy(string $id)

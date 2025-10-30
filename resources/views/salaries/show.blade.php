@@ -6,7 +6,7 @@
 <body>
     <h1>Detail Gaji</h1>
     <table border="1" cellpadding="8" cellspacing="0">
-        <tr><th>Karyawan</th><td>{{ $salary->employee->nama ?? '-' }}</td></tr>
+        <tr><th>Nama Karyawan</th><td>{{ $salary->employees->nama_lengkap ?? '-' }}</td></tr>
         <tr><th>Bulan</th><td>{{ $salary->bulan }}</td></tr>
         <tr><th>Gaji Pokok</th><td>{{ number_format($salary->gaji_pokok) }}</td></tr>
         <tr><th>Tunjangan</th><td>{{ number_format($salary->tunjangan) }}</td></tr>
