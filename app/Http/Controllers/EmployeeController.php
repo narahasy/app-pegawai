@@ -11,7 +11,9 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::latest()->paginate(5);
+         $employees = Employee::with('departemen', 'position')
+                                    ->latest()
+                                    ->paginate(5);
         
         return view('employees.index', compact('employees'));
     }
@@ -43,8 +45,8 @@ class EmployeeController extends Controller
 
     public function show(string $id)
     {
-        $employee = Employee::find($id);
-        
+        $employee = Employee::with('departemen', 'position')->findOrFail($id);
+      
         return view('employees.show', compact('employee'));
     }
 

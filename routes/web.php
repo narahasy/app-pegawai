@@ -16,3 +16,7 @@ Route::resource('departemens', DepartemenController::class);
 Route::resource('attendances', AttendanceController::class);
 Route::resource('positions', PositionController::class);
 Route::resource('salaries', SalaryController::class);
+
+Route::get('/', function () {
+    return view('dashboard'); 
+})->name('dashboard');

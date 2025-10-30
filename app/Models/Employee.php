@@ -21,13 +21,13 @@ class Employee extends Model
         'jabatan_id', 
     ];
 
-    public function department()
+    public function departemen()
     {
-        return $this->belongsTo(Department::class, 'departemen_id');
+       return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 
 
-    public function jabatan()
+    public function position()
     {
         return $this->belongsTo(Position::class, 'jabatan_id');
     }
