@@ -1,28 +1,22 @@
-@extends('layouts.app')  {{-- 1. Ganti 'master' jadi 'layouts.app' --}}
+@extends('layouts.app')
 
-@section('content')      {{-- 2. Mulai bagian konten --}}
+@section('content')
 
-{{-- Wrapper ini agar konten tidak tertutup header --}}
-<div class="container" style="padding-top: 140px; padding-bottom: 60px;">
+<div class="container wow fadeInUp" data-wow-duration="0.5s">
     
-    {{-- Ini <h1> kamu, tapi pakai style template --}}
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
         <h2>Data <em>Absensi</em></h2>
     </div>
 
-    {{-- Ini <a> "Tambah Absen" kamu, pakai style template --}}
     <div class="main-red-button" style="margin-bottom: 20px;">
-        <a href="{{ route('attendances.create') }}">Tambah Absen</a>
-    </div>
+        <a href="{{ route('attendances.create') }}" style="border-radius: 8px; padding: 8px 16px; font-size: 14px;">Tambah Absensi</a>
+     </div>
 
-    {{-- Ini <table> kamu, diganti jadi pakai style Bootstrap --}}
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table table-bordered table-striped table-hover">
             
-            {{-- Header Tabel (diberi background gelap) --}}
             <thead style="background-color: #333; color: white;">
                 <tr>
-                    {{-- Ini 6 kolom TH kamu, tidak ada yang diubah/ditambah --}}
                     <th>No</th>
                     <th>Nama Karyawan</th>
                     <th>Tanggal</th>
@@ -33,23 +27,12 @@
             </thead>
             
             <tbody>
-                {{-- 
-                  Looping data kamu.
-                  @forelse lebih aman dari @foreach karena ada @empty 
-                --}}
                 @forelse($attendances as $attendance)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     
-                    {{-- 
-                      BUG FIX KECIL:
-                      Kode aslimu: $attendance->employees (plural)
-                      Kubenerin jadi: $attendance->employee (singular)
-                      Karena relasinya pasti 'employee' (satu absensi punya satu employee)
-                    --}}
                     <td>{{ $attendance->employees->nama_lengkap ?? 'N/A' }}</td>
                     
-                    {{-- Tanggal, Waktu, Status dirapikan pakai style (Badge & Format) --}}
                     <td>{{ \Carbon\Carbon::parse($attendance->tanggal)->format('d M Y') }}</td>
                     <td>{{ $attendance->waktu_masuk ? \Carbon\Carbon::parse($attendance->waktu_masuk)->format('H:i') : '-' }}</td>
                     <td>{{ $attendance->waktu_keluar ? \Carbon\Carbon::parse($attendance->waktu_keluar)->format('H:i') : '-' }}</td>
@@ -66,7 +49,6 @@
                     </td>
                 </tr>
                 @empty
-                {{-- Ini akan tampil jika datanya kosong --}}
                 <tr>
                     <td colspan="6" class="text-center">Belum ada data absensi.</td>
                 </tr>
@@ -75,6 +57,6 @@
         </table>
     </div>
 
-</div> {{-- Penutup container --}}
+</div>
 
-@endsection {{-- 3. Selesai bagian konten --}}
+@endsection

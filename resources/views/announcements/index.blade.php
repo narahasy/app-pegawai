@@ -5,11 +5,11 @@
 <div class="container wow fadeInUp" data-wow-duration="0.5s">
     
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
-        <h2>Daftar <em>Jabatan</em></h2>
+        <h2>Daftar <em>Pengumuman</em></h2>
     </div>
 
     <div class="main-red-button" style="margin-bottom: 20px;">
-        <a href="{{ route('positions.create') }}" style="border-radius: 8px; padding: 8px 16px; font-size: 14px;">Tambah Jabatan</a>
+        <a href="{{ route('announcements.create') }}" style="border-radius: 8px; padding: 8px 16px; font-size: 14px;">Tambah Pengumuman</a>
     </div>
 
     <div class="table-responsive mt-4">
@@ -17,22 +17,23 @@
             
             <thead style="background-color: #333; color: white;">
                 <tr>
-                    <th>Nama Jabatan</th>
-                    <th>Gaji Pokok</th>
+                    <th>Judul</th>
+                    <th>Konten</th>
+                    <th>Tanggal Posting</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             
             <tbody>
-                @forelse($positions as $position)
+                @forelse($announcements as $announcement)
                 <tr>
-                    <td>{{ $position->nama_jabatan }}</td>
-                    <td>Rp {{ number_format($position->gaji_pokok, 0, ',', '.') }}</td>
-                    
+                    <td>{{ $announcement->title }}</td>
+                    <td>{{ Str::limit($announcement->content, 100) }}</td>
+                    <td>{{ $announcement->date_posted }}</td>
                     <td>
-                        <a href="{{ route('positions.show', $position) }}" class="btn btn-info btn-sm">Detail</a>
-                        <a href="{{ route('positions.edit', $position) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('positions.destroy', $position) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('announcements.show', $announcement) }}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="{{ route('announcements.edit', $announcement) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('announcements.destroy', $announcement) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
@@ -41,15 +42,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">Belum ada data jabatan.</td>
+                    <td colspan="4" class="text-center">Belum ada data pengumuman.</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
-    </div>
-
-    <div class="mt-4">
-        {{ $positions->links() }}
     </div>
 
 </div>

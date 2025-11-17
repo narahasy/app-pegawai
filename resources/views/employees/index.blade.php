@@ -1,30 +1,25 @@
-@extends('layouts.app')  {{-- 1. MEWAJIBKAN pakai layout baru kita --}}
+@extends('layouts.app')
 
-@section('content')      {{-- 2. Memulai "slot" konten --}}
+@section('content')
 
-{{-- Wrapper ini penting agar konten tidak tertutup header --}}
-<div class="container" style="padding-top: 140px; padding-bottom: 60px;">
+<div class="container wow fadeInUp" data-wow-duration="0.5s">
     
-    {{-- Judul Halaman (pakai gaya template) --}}
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
         <h2>Daftar <em>Pegawai</em></h2>
     </div>
 
-    {{-- Tombol Tambah (pakai gaya template) --}}
     <div class="main-red-button" style="margin-bottom: 20px;">
-        <a href="{{ route('employees.create') }}">Tambah Employee</a>
+        <a href="{{ route('employees.create') }}" style="border-radius: 8px; padding: 8px 16px; font-size: 14px;">Tambah Pegawai</a>
     </div>
 
-    {{-- Tabel (pakai kelas Bootstrap dari template agar rapi) --}}
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table table-bordered table-striped table-hover">
             
-            {{-- Header Tabel (DITAMBAH DEPARTEMEN & JABATAN) --}}
             <thead style="background-color: #333; color: white;">
                 <tr>
                     <th>Nama Lengkap</th>
-                    <th>Departemen</th>  {{-- BARU --}}
-                    <th>Jabatan</th>     {{-- BARU --}}
+                    <th>Departemen</th>
+                    <th>Jabatan</th>
                     <th>Email</th>
                     <th>Nomor Telepon</th>
                     <th>Tanggal Lahir</th>
@@ -35,16 +30,13 @@
                 </tr>
             </thead>
             
-            {{-- Isi Tabel (DITAMBAH DEPARTEMEN & JABATAN) --}}
             <tbody>
                 @foreach($employees as $employee)
                 <tr>
                     <td>{{ $employee->nama_lengkap }}</td>
                     
-                    {{-- Panggil relasi departemen --}}
                     <td>{{ $employee->departemen->nama_departemen ?? 'N/A' }}</td>
                     
-                    {{-- Panggil relasi position --}}
                     <td>{{ $employee->position->nama_jabatan ?? 'N/A' }}</td>
                     
                     <td>{{ $employee->email }}</td>
@@ -53,7 +45,6 @@
                     <td>{{ $employee->alamat }}</td>
                     <td>{{ $employee->tanggal_masuk }}</td>
                     <td>
-                        {{-- Mengubah Status jadi "badge" agar rapi --}}
                         @if(strtolower($employee->status) == 'aktif')
                             <span class="badge bg-success">Aktif</span>
                         @else
@@ -61,8 +52,6 @@
                         @endif
                     </td>
                     <td>
-                        {{-- Mengubah Aksi jadi "tombol" agar rapi --}}
-                        {{-- Peringatan: Route di sini masih pakai $employee->id (seperti yang kamu inginkan) --}}
                         <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">Detail</a>
                         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline;">
@@ -75,8 +64,8 @@
                 @endforeach
             </tbody>
         </table>
-    </div> {{-- Penutup table-responsive --}}
+    </div>
 
-</div> {{-- Penutup container --}}
+</div>
 
-@endsection {{-- 3. Mengakhiri "slot" konten --}}
+@endsection

@@ -1,25 +1,20 @@
-@extends('layouts.app')  {{-- 1. Ganti 'master' jadi 'layouts.app' --}}
+@extends('layouts.app')
 
-@section('content')      {{-- 2. Mulai bagian konten --}}
+@section('content')
 
-{{-- Wrapper ini agar konten tidak tertutup header --}}
-<div class="container" style="padding-top: 140px; padding-bottom: 60px;">
+<div class="container wow fadeInUp" data-wow-duration="0.5s">
     
-    {{-- Ini <h1> kamu, tapi pakai style template --}}
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
         <h2>Daftar <em>Gaji</em></h2>
     </div>
 
-    {{-- Ini <a> "Tambah Salary" kamu, pakai style template --}}
     <div class="main-red-button" style="margin-bottom: 20px;">
-        <a href="{{ route('salaries.create') }}">Tambah Salary</a>
+        <a href="{{ route('salaries.create') }}" style="border-radius: 8px; padding: 8px 16px; font-size: 14px;">Tambah Salary</a>
     </div>
 
-    {{-- Ini <table> kamu, diganti jadi pakai style Bootstrap --}}
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table table-bordered table-striped table-hover">
             
-            {{-- Header Tabel (diberi background gelap) --}}
             <thead style="background-color: #333; color: white;">
                 <tr>
                     <th>Nama Karyawan</th>
@@ -35,22 +30,15 @@
             <tbody>
                 @forelse($salaries as $salary)
                 <tr>
-                    {{-- DIBENERIN: $salary->employees jadi $salary->employee --}}
                     <td>{{ $salary->employees->nama_lengkap ?? 'N/A' }}</td>
                     
-                    {{-- Format bulan jadi "Nama Bulan Tahun" --}}
                     <td>{{ \Carbon\Carbon::parse($salary->bulan . '-01')->format('F Y') }}</td>
                     
-                    {{-- Format mata uang --}}
                     <td>Rp {{ number_format($salary->gaji_pokok, 0, ',', '.') }}</td>
                     <td>Rp {{ number_format($salary->tunjangan, 0, ',', '.') }}</td>
                     <td>Rp {{ number_format($salary->potongan, 0, ',', '.') }}</td>
                     <td>Rp {{ number_format($salary->total_gaji, 0, ',', '.') }}</td>
                     
-                    {{-- 
-                      Ini <td> "Aksi" kamu, dirapikan jadi tombol.
-                      PENTING: $salary->id diubah jadi $salary agar TIDAK ERROR
-                    --}}
                     <td>
                         <a href="{{ route('salaries.show', $salary) }}" class="btn btn-info btn-sm">Detail</a>
                         <a href="{{ route('salaries.edit', $salary) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -62,7 +50,6 @@
                     </td>
                 </tr>
                 @empty
-                {{-- Ini akan tampil jika datanya kosong --}}
                 <tr>
                     <td colspan="7" class="text-center">Belum ada data gaji.</td>
                 </tr>
@@ -71,11 +58,10 @@
         </table>
     </div>
 
-    {{-- Menampilkan link Paginasi --}}
     <div class="mt-4">
         {{ $salaries->links() }}
     </div>
 
-</div> {{-- Penutup container --}}
+</div>
 
-@endsection {{-- 3. Selesai bagian konten --}}
+@endsection

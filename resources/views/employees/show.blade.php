@@ -1,22 +1,18 @@
-@extends('layouts.app')  {{-- 1. Pakai layout utama --}}
+@extends('layouts.app')
 
-@section('content')      {{-- 2. Mulai bagian konten --}}
+@section('content')
 
-{{-- Wrapper agar tidak tertutup header --}}
 <div class="container" style="padding-top: 140px; padding-bottom: 60px;">
     
-    {{-- Judul Halaman --}}
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
         <h2>Detail <em>Pegawai</em></h2>
     </div>
 
-    {{-- Bungkus detail pakai "card" Bootstrap --}}
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card shadow-sm border-0" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
                     
-                    {{-- Tabel untuk menampilkan detail data --}}
                     <table class="table table-bordered table-striped">
                         <tbody>
                             <tr>
@@ -46,7 +42,6 @@
                             <tr>
                                 <th>Status</th>
                                 <td>
-                                    {{-- Pakai badge agar rapi --}}
                                     @if(strtolower($employee->status) == 'aktif')
                                         <span class="badge bg-success">Aktif</span>
                                     @else
@@ -56,18 +51,15 @@
                             </tr>
                             <tr>
                                 <th>Departemen</th>
-                                {{-- Menampilkan nama departemen dari relasi --}}
                                 <td>{{ $employee->departemen->nama_departemen ?? 'N/A' }}</td>
                             </tr>
                             <tr>
                                 <th>Jabatan</th>
-                                {{-- Menampilkan nama jabatan dari relasi --}}
                                 <td>{{ $employee->position->nama_jabatan ?? 'N/A' }}</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    {{-- Tombol Aksi --}}
                     <div class="text-end mt-4">
                         <a href="{{ route('employees.index') }}" class="btn btn-secondary">Kembali</a>
                         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning">Edit Data</a>
@@ -78,6 +70,6 @@
         </div>
     </div>
 
-</div> {{-- Penutup container --}}
+</div>
 
-@endsection {{-- 3. Selesai bagian konten --}}
+@endsection

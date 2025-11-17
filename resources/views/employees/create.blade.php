@@ -1,19 +1,13 @@
-@extends('layouts.app')  {{-- 1. Pakai layout utama --}}
+@extends('layouts.app')
 
-@section('content')      {{-- 2. Mulai bagian konten --}}
+@section('content')
 
-{{-- Wrapper agar tidak tertutup header --}}
 <div class="container" style="padding-top: 140px; padding-bottom: 60px;">
     
-    {{-- Judul Halaman --}}
     <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
         <h2>Form <em>Tambah Pegawai</em></h2>
     </div>
 
-    {{-- 
-      Kita bungkus form-nya pakai "card" dari Bootstrap 
-      agar terlihat rapi di tengah.
-    --}}
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card shadow-sm border-0" style="border-radius: 15px;">
@@ -22,8 +16,6 @@
                     <form action="{{ route('employees.store') }}" method="POST">
                         @csrf
                         
-                        {{-- (INI ADALAH FORM BOOTSTRAP, BUKAN TABEL) --}}
-
                         <div class="mb-3">
                             <label for="nama_lengkap" class="form-label">Nama Lengkap:</label>
                             <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" required>
@@ -82,11 +74,8 @@
                             </select>
                         </div>
 
-                        {{-- Tombol (pakai kelas template) --}}
                         <div class="text-end mt-4">
                             <a href="{{ route('employees.index') }}" class="btn btn-secondary">Batal</a>
-                            
-                            {{-- INI YANG DIGANTI --}}
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
 
@@ -97,6 +86,6 @@
         </div>
     </div>
 
-</div> {{-- Penutup container --}}
+</div>
 
-@endsection {{-- 3. Selesai bagian konten --}}
+@endsection
