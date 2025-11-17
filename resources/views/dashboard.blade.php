@@ -157,7 +157,7 @@
             <img src="{{ asset('assets/images/2.png') }}" alt="Icon Absensi">
           </div>
           <h4>Kelola Absensi</h4>
-          <p>Catat dan pantau kehadiran, izin, sakit, dan alpa karyawan secara real-time.</p>
+          <p>Catat dan pantau kehadiran, izin, sakit, dan alpa pegawai secara real-time.</p>
           <div class="main-red-button"><a href="{{ route('attendances.index') }}" style="padding-top: 8px; padding-bottom: 8px;">Lihat Data</a></div>
         </div>
       </div>
