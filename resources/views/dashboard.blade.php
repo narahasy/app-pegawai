@@ -13,6 +13,11 @@
         padding-bottom: 40px;
     }
 
+    .section-heading {
+        text-align: center !important;
+        margin-bottom: 40px;
+    }
+
     .services .service-item {
         padding: 20px 18px;
         border-radius: 0 !important;
