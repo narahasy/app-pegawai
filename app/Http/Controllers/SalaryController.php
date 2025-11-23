@@ -10,13 +10,13 @@ class SalaryController extends Controller
 {
     public function index()
     {
-        $salaries = Salary::latest()->paginate(5);
+        $salaries = Salary::with('employee')->latest()->paginate(5);
         return view('salaries.index', compact('salaries'));
     }
 
     public function create()
     {
-        $employees = Employee::all();
+        $employees = Employee::with('position')->get();
         return view('salaries.create', compact('employees'));
     }
 
@@ -24,7 +24,7 @@ class SalaryController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|integer',
-            'bulan' => 'required|date',
+            'bulan' => 'required',
             'gaji_pokok' => 'required|numeric',
             'tunjangan' => 'required|numeric',
             'potongan' => 'required|numeric',
@@ -52,7 +52,7 @@ class SalaryController extends Controller
 
     public function edit(Salary $salary)
     {
-        $employees = Employee::all();
+        $employees = Employee::with('position')->get();
         return view('salaries.edit', compact('salary', 'employees'));
     }
 
@@ -60,7 +60,7 @@ class SalaryController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|integer',
-            'bulan' => 'required|date',
+            'bulan' => 'required',
             'gaji_pokok' => 'required|numeric',
             'tunjangan' => 'required|numeric',
             'potongan' => 'required|numeric',
@@ -79,11 +79,6 @@ class SalaryController extends Controller
 
         return redirect()->route('salaries.index')
                          ->with('success', 'Data gaji berhasil diperbarui.');
-    }
-
-    public function employees()
-    {
-        return $this->belongsTo(Employee::class, 'karyawan_id');
     }
 
     public function destroy(Salary $salary)

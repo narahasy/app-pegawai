@@ -18,11 +18,13 @@
                         @method('PUT')
                         
                         <div class="mb-3">
-                            <label for="karyawan_id" class="form-label">Nama Karyawan:</label>
-                            <select id="karyawan_id" name="karyawan_id" class="form-select" required>
-                                <option value="">Pilih Karyawan</option>
+                            <label for="karyawan_id" class="form-label">Nama Pegawai:</label>
+                            <select id="karyawan_id" name="karyawan_id" class="form-select" onchange="updateGaji()" required>
+                                <option value="">Pilih Pegawai</option>
                                 @foreach($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ old('karyawan_id', $salary->karyawan_id) == $employee->id ? 'selected' : '' }}>
+                                    <option value="{{ $employee->id }}" 
+                                            data-gaji="{{ optional($employee->position)->gaji_pokok ?? 0 }}"
+                                            {{ old('karyawan_id', $salary->karyawan_id) == $employee->id ? 'selected' : '' }}>
                                         {{ $employee->nama_lengkap }}
                                     </option>
                                 @endforeach
@@ -32,26 +34,32 @@
                         <div class="mb-3">
                             <label for="bulan" class="form-label">Bulan:</label>
                             <input type="month" id="bulan" name="bulan" class="form-control" 
-                                   value="{{ old('bulan', $salary->bulan) }}" required>
+                                       value="{{ old('bulan', $salary->bulan) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="gaji_pokok" class="form-label">Gaji Pokok:</label>
                             <input type="number" id="gaji_pokok" name="gaji_pokok" class="form-control" 
-                                   value="{{ old('gaji_pokok', $salary->gaji_pokok) }}" required>
+                                       value="{{ old('gaji_pokok', $salary->gaji_pokok) }}" readonly required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="tunjangan" class="form-label">Tunjangan:</label>
-                                <input type="number" id="tunjangan" name="tunjangan" class="form-control" 
-                                       value="{{ old('tunjangan', $salary->tunjangan) }}" required>
+                                <input type="number" id="tunjangan" name="tunjangan" class="form-control" oninput="hitungTotal()"
+                                               value="{{ old('tunjangan', $salary->tunjangan) }}" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="potongan" class="form-label">Potongan:</label>
-                                <input type="number" id="potongan" name="potongan" class="form-control" 
-                                       value="{{ old('potongan', $salary->potongan) }}" required>
+                                <input type="number" id="potongan" name="potongan" class="form-control" oninput="hitungTotal()"
+                                               value="{{ old('potongan', $salary->potongan) }}" required>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="total_gaji" class="form-label fw-bold">Total Gaji:</label>
+                            <input type="number" id="total_gaji" class="form-control fw-bold" style="background-color: #e9ecef;" 
+                                       value="{{ $salary->total_gaji }}" readonly>
                         </div>
 
                         <div class="text-end mt-4">
@@ -67,5 +75,29 @@
     </div>
 
 </div>
+
+<script>
+    function updateGaji() {
+        let select = document.getElementById('karyawan_id');
+        let selectedOption = select.options[select.selectedIndex];
+        let gajiDasar = selectedOption.getAttribute('data-gaji');
+        
+        document.getElementById('gaji_pokok').value = gajiDasar;
+        hitungTotal();
+    }
+
+    function hitungTotal() {
+        let gaji = parseFloat(document.getElementById('gaji_pokok').value) || 0;
+        let tunjangan = parseFloat(document.getElementById('tunjangan').value) || 0;
+        let potongan = parseFloat(document.getElementById('potongan').value) || 0;
+        
+        let total = gaji + tunjangan - potongan;
+        document.getElementById('total_gaji').value = total;
+    }
+
+    window.onload = function() {
+        hitungTotal();
+    };
+</script>
 
 @endsection

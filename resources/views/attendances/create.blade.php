@@ -17,9 +17,9 @@
                         @csrf
                         
                         <div class="mb-3">
-                            <label for="karyawan_id" class="form-label">Nama Karyawan</label>
+                            <label for="karyawan_id" class="form-label">Nama Pegawai</label>
                             <select name="karyawan_id" id="karyawan_id" class="form-select" required>
-                                <option value="">Pilih Karyawan</option>
+                                <option value="">Pilih Pegawai</option>
                                 @foreach($employees as $employee)
                                     <option value="{{ $employee->id }}">{{ $employee->nama_lengkap }}</option>
                                 @endforeach

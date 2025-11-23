@@ -18,7 +18,7 @@
                         @method('PUT')
                         
                         <div class="mb-3">
-                            <label for="karyawan_id" class="form-label">Nama Karyawan:</label>
+                            <label for="karyawan_id" class="form-label">Nama Pegawai:</label>
                             <select id="karyawan_id" name="karyawan_id" class="form-select" required>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('karyawan_id', $attendance->karyawan_id) == $employee->id ? 'selected' : '' }}>

@@ -16,7 +16,7 @@
                     <table class="table table-bordered table-striped">
                         <tbody>
                             <tr>
-                                <th style="width: 30%;">Nama Karyawan</th>
+                                <th style="width: 30%;">Nama Pegawai</th>
                                 <td>{{ $salary->employees->nama_lengkap ?? 'N/A' }}</td>
                             </tr>
                             <tr>

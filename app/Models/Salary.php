@@ -18,8 +18,13 @@ class Salary extends Model
         'total_gaji',
     ];
 
-    public function employees()
+    public function employee()
     {
         return $this->belongsTo(Employee::class, 'karyawan_id');
+    }
+
+    public function employees()
+    {
+        return $this->employee();
     }
 }
